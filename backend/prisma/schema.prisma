@@ -1,9 +1,54 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+
+  // Champs optionnels
+  firstName String?
+  lastName  String?
+  bio       String?
+  avatar    String?
+  birthday  DateTime?
+
+  friendshipsSent     Friendship[] @relation("FriendshipSender")
+  friendshipsReceived Friendship[] @relation("FriendshipReceiver")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Friendship {
+  id        String   @id @default(uuid())
+
+  senderId   String
+  receiverId String
+
+  sender   User @relation("FriendshipSender", fields: [senderId], references: [id])
+  receiver User @relation("FriendshipReceiver", fields: [receiverId], references: [id])
+
+  status FriendshipStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([senderId, receiverId])
+  @@index([senderId])
+  @@index([receiverId])
 }
