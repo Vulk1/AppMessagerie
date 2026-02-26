@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, dracula, autumn;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Base */
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
