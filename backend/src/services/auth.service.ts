@@ -4,6 +4,7 @@ import prisma from "../lib/prisma.js";
 import { AppError } from "../utils/AppError.js";
 
 export const loginService = async ({ identifier, password }: LoginInput) => {
+    console.log(`Tentative de connexion de ${identifier}`);
     // On vérifie qu'il existe un utilisateur avec cet email ou username (identifier)
     const user = await prisma.user.findFirst({
         where: { 
@@ -16,7 +17,8 @@ export const loginService = async ({ identifier, password }: LoginInput) => {
             id: true,
             email: true,
             username: true,
-            password: true
+            password: true,
+            avatar: true
          },
     });
 
@@ -24,20 +26,24 @@ export const loginService = async ({ identifier, password }: LoginInput) => {
         throw new AppError('Identifiants Incorrectes', 400);
     }
 
-    const valid = bcrypt.compare(password, user.password);
+    const valid = await bcrypt.compare(password, user.password);
 
     if(!valid) {
         throw new AppError('Identifiants Incorrectes', 400);
+        
     }
 
+    console.log(`Est connecté : ${identifier}`);
     return {
         id: user.id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        avatar: user.avatar
     };
 };
 
 export const registerService = async ({email, username, password, confirmPassword}: RegisterInput) => {
+    console.log(`Tentative de création de compte de ${email}`);
     const user = await prisma.user.findFirst({
         where: {
             OR: [
@@ -66,6 +72,7 @@ export const registerService = async ({email, username, password, confirmPasswor
         data: newUser
     });
 
+    console.log(`Compte créé : ${email}`);
     return {
         id: data.id,
         email: data.email,
