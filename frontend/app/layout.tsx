@@ -22,8 +22,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Messagerie Osmose",
-  description: "Messagerie en ligne Osmose. Ouvrez vous aux autres en toute discretion.",
+  title: "Osmose",
+  description: "Messagerie en ligne Osmose. Connectez vous, discutez, vibez.",
 };
 
 export default function RootLayout({

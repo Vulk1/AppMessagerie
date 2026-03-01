@@ -16,13 +16,17 @@ body {
   min-height: 100vh;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 button {
   cursor: pointer;
   border: none;
 }
 
+input:-webkit-autofill,
+input:-moz-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #26193F inset !important;
+  -webkit-text-fill-color: white !important;
+  color: white !important;
+}
+label:has(input:-webkit-autofill) {
+  background-color: #26193F;
+}

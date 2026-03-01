@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-roboto)"],
-        poppins: ["var(--font-poppins)"],
+        sans: ["var(--font-poppins)"],
+        roboto: ["var(--font-roboto)"],
         inter: ["var(--font-inter)"]
       },
     },
