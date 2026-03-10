@@ -8,7 +8,7 @@ import { loginSchema} from "@/lib/validations/auth.schema"
 import { LoginInput } from "@/types/auth.types"
 import Image from "next/image"
 import { User, KeyRound } from "lucide-react";
-import FormInput from "@/components/FormInput"
+import FormInput from "@/features/ui/components/FormInput"
 import Link from "next/link"
 
   

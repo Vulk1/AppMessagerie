@@ -1,4 +1,5 @@
 import { RegisterInput, LoginInput} from "../types/auth.types.js";
+import { getRandomAvatar } from "../utils/Media.js";
 import bcrypt from "bcrypt";
 import prisma from "../lib/prisma.js";
 import { AppError } from "../utils/AppError.js";
@@ -66,7 +67,8 @@ export const registerService = async ({email, username, password, confirmPasswor
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = {email, username, password: hashedPassword};
+    const randomAvatarLink = getRandomAvatar();
+    const newUser = {email, username, password: hashedPassword, avatar: randomAvatarLink};
 
     const data = await prisma.user.create({
         data: newUser
@@ -76,6 +78,7 @@ export const registerService = async ({email, username, password, confirmPasswor
     return {
         id: data.id,
         email: data.email,
-        username: data.username
+        username: data.username,
+        avatar: data.avatar
     };
 }

@@ -14,6 +14,24 @@ enum FriendshipStatus {
   BLOCKED
 }
 
+enum ServerRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum ChannelType {
+  TEXT
+  VOICE
+}
+
+enum AttachmentType {
+  IMAGE
+  VIDEO
+  AUDIO
+  FILE
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -26,6 +44,12 @@ model User {
   bio       String?
   avatar    String?
   birthday  DateTime?
+
+  ownedServers       Server[]  
+  serverMemberships ServerMember[]
+  messages          Message[]
+  dmParticipants    DMParticipant[]
+  dmMessages        DMMessage[]
 
   friendshipsSent     Friendship[] @relation("FriendshipSender")
   friendshipsReceived Friendship[] @relation("FriendshipReceiver")
@@ -51,4 +75,123 @@ model Friendship {
   @@unique([senderId, receiverId])
   @@index([senderId])
   @@index([receiverId])
+}
+
+model Server {
+  id   String @id @default(uuid())
+  name String
+  icon String?
+
+  ownerId String
+  owner   User @relation(fields: [ownerId], references: [id])
+
+  members  ServerMember[]
+  channels Channel[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model ServerMember {
+  id String @id @default(uuid())
+
+  userId   String
+  serverId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  server Server @relation(fields: [serverId], references: [id])
+
+  role ServerRole @default(MEMBER)
+
+  joinedAt DateTime @default(now())
+
+  @@unique([userId, serverId])
+}
+
+model Channel {
+  id   String @id @default(uuid())
+  name String
+
+  type ChannelType @default(TEXT)
+
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id])
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id String @id @default(uuid())
+
+  content String?
+
+  senderId  String
+  channelId String
+
+  sender  User    @relation(fields: [senderId], references: [id])
+  channel Channel @relation(fields: [channelId], references: [id])
+
+  attachments Attachment[]
+
+  createdAt DateTime @default(now())
+  @@index([channelId])
+}
+
+model DMConversation {
+  id String @id @default(uuid())
+
+  participants DMParticipant[]
+  messages     DMMessage[]
+
+  createdAt DateTime @default(now())
+}
+
+model DMParticipant {
+  id String @id @default(uuid())
+
+  userId String
+  conversationId String
+
+  lastReadMessageId String?
+  joinedAt DateTime @default(now())
+
+  user         User           @relation(fields: [userId], references: [id])
+  conversation DMConversation @relation(fields: [conversationId], references: [id])
+
+  @@unique([userId, conversationId])
+}
+
+model DMMessage {
+  id String @id @default(uuid())
+
+  content String
+
+  senderId String
+  conversationId String
+
+  sender       User           @relation(fields: [senderId], references: [id])
+  conversation DMConversation @relation(fields: [conversationId], references: [id])
+
+  createdAt DateTime @default(now())
+  @@index([conversationId])
+}
+
+model Attachment {
+  id String @id @default(uuid())
+
+  url  String
+  thumbnailUrl String?
+
+  type AttachmentType
+
+  width  Int?
+  height Int?
+
+  messageId String
+  message   Message @relation(fields: [messageId], references: [id])
+
+  createdAt DateTime @default(now())
 }

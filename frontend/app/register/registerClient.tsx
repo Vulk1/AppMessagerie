@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import { registerSchema} from "@/lib/validations/auth.schema"
 import { RegisterInput } from "@/types/auth.types"
-import FormInput from "@/components/FormInput"
+import FormInput from "@/features/ui/components/FormInput"
 import Link from "next/link"
 import Image from "next/image"
 import { User, KeyRound, Mail, LockKeyhole } from "lucide-react";
@@ -23,35 +23,39 @@ export default function RegisterClient() {
     });
 
     const onSubmit = async (data: RegisterInput) => {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_REGISTER_ROUTE!, {
-            method: "POST",
-            headers: {"Content-Type" : "application/json"},
-            body: JSON.stringify({
-                email: data.email,
-                username: data.username,
+        try{
+            const res = await fetch(process.env.NEXT_PUBLIC_API_REGISTER_ROUTE!, {
+                method: "POST",
+                headers: {"Content-Type" : "application/json"},
+                body: JSON.stringify({
+                    email: data.email,
+                    username: data.username,
+                    password: data.password,
+                    confirmPassword: data.confirmPassword
+                })
+            });
+
+            if(!res.ok) {
+                const errorData = await res.json();
+                toast.error(errorData?.message ?? "Erreur lors de la création de compte");
+                return
+            }
+
+            const authRes = await signIn("credentials", {
+                identifier: data.email,
                 password: data.password,
-                confirmPassword: data.confirmPassword
-            })
-        });
+                redirect: false
+            });
 
-        if(!res.ok) {
-            const errorData = await res.json();
-            toast.error(errorData?.message ?? "Erreur lors de la création de compte");
-            return
-        }
-
-        const authRes = await signIn("credentials", {
-            identifier: data.email,
-            password: data.password,
-            redirect: false
-        });
-
-        if(authRes?.error) {
-            toast.error(authRes.error);
-            router.push('/login');
-        } else {
-            router.refresh();
-            router.push('/');
+            if(authRes?.error) {
+                toast.error(authRes.error);
+                router.push('/login');
+            } else {
+                router.refresh();
+                router.push('/');
+            }
+        }catch(error) {
+            toast.error("Impossible de contacter le server");
         }
     }
 
@@ -72,7 +76,7 @@ export default function RegisterClient() {
                 width={236}
                 height={66}
                 />
-                <h1 className="text-3xl font-semibold
+                <h1 className="text-3xl font-bold
                 bg-linear-to-r
                 from-[#9DB7FF]
                 via-[#C084FC]
@@ -110,10 +114,16 @@ export default function RegisterClient() {
                             error={errors.confirmPassword}
                             registration={register("confirmPassword")}
                         />
-                        <label className="flex justify-end gap-2 label px-1 text-end text-white/70 font-medium  hover:text-white
+                        <label className="flex flex-col gap-2 items-end label px-1 text-end text-white/70 font-medium  hover:text-white
                              transition-all duration-200">
-                            <input type="checkbox" className="checkbox" />
-                            J'accepte les conditions d'utilisation
+                            <div className="flex justify-end text-end gap-2">
+                                 <input type="checkbox" className="checkbox" {...register('terms')} />
+                                 <span>J'accepte les conditions d'utilisation</span>
+                            </div>
+                           
+                            {errors.terms && (
+                                <p className="text-error text-sm">{errors.terms.message}</p>
+                            )}
                         </label>
                     </div>
                     <button 
@@ -127,7 +137,7 @@ export default function RegisterClient() {
                          transition-all duration-200 rounded-field
                     ${isSubmitting ? 'btn-disabled' : 'btn-active'}`}>
                        S'inscrire
-                        {isSubmitting ??
+                        {isSubmitting &&
                             <span className="loading loading-spinner loading-xs"></span>
                         }
                         </button>

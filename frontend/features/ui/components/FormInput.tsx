@@ -34,7 +34,7 @@ export default function FormInput({
                 </label>
                 {
                 error && (
-                     <span className="text-error text-sm">{error.message}</span>
+                     <span className="text-error text-sm px-1">{error.message}</span>
                 )
                 }
                  

@@ -22,7 +22,12 @@ export const registerSchema = z
         .min(3, "Minimum 3 caractères")
         .max(20, "Maximum 20 caractères")
         .regex(/^[a-zA-Z0-9_]+$/, "Uniquement lettres, chiffres et _")
-        .trim()
+        .trim(),
+
+        terms: z
+        .literal(true, {
+            message: "Vous devez accepter les conditions d'utilisation",
+        }),
     })
     .superRefine((data, ctx) => {
         if (data.password !== data.confirmPassword) {
