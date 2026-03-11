@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
-
-function fetchServers() {
-    return {data: []}
-}
+import { fetchServers } from "../api/fetchServers";
 
 export default function useServers() {
     return useQuery({
       queryKey: ["servers"],
-      queryFn: fetchServers
+      queryFn: fetchServers,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 2,
+      refetchOnWindowFocus: false
     });
-  }
+}

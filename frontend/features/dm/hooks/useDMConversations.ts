@@ -1,13 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-
-function fetchDMConversations() {
-    return;
-}
-
+import { fetchDMConversations } from "../api/fetchDMConversations";
 
 export default function useDMConversations() {
     return useQuery({
-          queryKey: ["servers"],
+          queryKey: ["dm-conversations"],
           queryFn: fetchDMConversations
         });
 }

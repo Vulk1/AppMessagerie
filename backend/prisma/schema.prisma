@@ -92,7 +92,6 @@ model Server {
   updatedAt DateTime @updatedAt
 }
 
-
 model ServerMember {
   id String @id @default(uuid())
 
