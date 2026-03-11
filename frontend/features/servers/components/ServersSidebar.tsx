@@ -1,6 +1,5 @@
 import useServers from "../hooks/useServers";
 import ServerItem from "./ServerItem";
-import useDMConversations from "@/features/dm/hooks/useDMConversations"
 import DMButton from "@/features/dm/components/DMButton";
 import type { Server } from "@/types/chat.types";
 

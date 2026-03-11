@@ -6,6 +6,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --light-white: #fbfbfb;
+  --dull-white: #6a6678;
 }
 
 /* Base */

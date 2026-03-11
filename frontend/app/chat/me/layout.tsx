@@ -1,17 +1,25 @@
-import useDMConversations from "@/features/dm/hooks/useDMConversations";
-import { useFriends } from "@/features/friends/hooks/useFriends";
+import DMSidebar from "@/features/dm/components/DMSidebar";
+import FriendsSidebar from "@/features/friends/components/FriendsSidebar";
 
 export default function DMLayout({ children }: { children: React.ReactNode }) {
-    const { data: conversations } = useDMConversations();
-    const {data: friends } = useFriends();
-    
     return (
         <div>
             <div>
-                conversation et amis
+                <div>
+                    <button>
+                        Amis
+                    </button>
+                    <button>
+                        Boutique
+                    </button>
+                </div>
+                <DMSidebar />
             </div>
             <div>
                 {children}
+            </div>
+            <div>
+               <FriendsSidebar />
             </div>
         </div>
     );

@@ -56,7 +56,7 @@ export default function LoginClient() {
                 width={236}
                 height={66}
                 />
-                <h1 className="text-3xl font-semibold
+                <h1 className="text-3xl font-bold
                 bg-linear-to-r
                 from-[#9DB7FF]
                 via-[#C084FC]
@@ -80,14 +80,14 @@ export default function LoginClient() {
                                 error={errors.password}
                                 registration={register("password")}
                             />
-                            <Link href={"/forgot"} className="inline text-end text-white/70 font-medium  hover:text-white
+                            <Link href={"/forgot"} className="inline text-end text-white/70  font-medium  hover:text-white
                              transition-all duration-200">
                             Mot de passe oublié ?
                             </Link>
                     </div>
                     <button 
                     type="submit" 
-                    className={`btn bg-[#6039a3] #8155d1 bg-linear-to-b 
+                    className={`btn bg-linear-to-b 
                         from-[#8155d1] 
                         to-[#6039a3] 
                          py-6 w-full text-lg text-white mt-5 mb-3 shadow-lg 
