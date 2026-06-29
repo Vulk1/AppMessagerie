@@ -1,5 +1,3 @@
-
-
 type ChannelType = "TEXT" | "VOICE";
 type ServerRole = "OWNER" | "ADMIN" | "MEMBER";
 type FriendshipStatus = "PENDING" | "ACCEPTED" | "BLOCKED";
@@ -24,16 +22,15 @@ export interface User {
     id: string;
     email: string;
     username: string;
+    avatar: string;
 
     // Champs optionnels
     firstName: string | null;
     lastName: string | null;
     bio: string | null;
-    avatar: string | null;
     birthday: string | null;
 
     status: UserStatus;
-
 }
 
 export type UserPreview = Pick<
@@ -56,3 +53,11 @@ export interface DMConversation {
     lastMessage: MessagePreview | null
     unreadCount: number;
 }
+
+export type ChatUIStateData = {
+    selectedDMId: string | null;
+    selectedServerId: string | null;
+    selectedChannelId: string | null;
+    messageDraftByChannel: Record<string, string>;
+    isSidebarOpen: boolean;
+};

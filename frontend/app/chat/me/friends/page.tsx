@@ -7,6 +7,9 @@ type FormData = {
     username: string;
   };
 
+
+  /**Page pour ajouter des amis */
+
 export default function Friends() {
     const { register, handleSubmit, reset } = useForm<FormData>();
 
