@@ -2,8 +2,10 @@
 
 export default function DMButton() {
     return(
-        <button className="btn">
-            DM
-        </button>
+        <div className="avatar">
+            <button className="w-24 rounded-full">
+                <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
+            </button>
+        </div>
     );
 }

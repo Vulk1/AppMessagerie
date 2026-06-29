@@ -1,7 +1,13 @@
 import type { User } from "@/types/chat.types";
+import { API_URL } from "@/lib/api";
 
 export async function fetchMe(): Promise<User> {
-    const res = await fetch("/api/me", {
+
+    if (!API_URL) {
+        throw new Error("NEXT_PUBLIC_API_URL is not defined");
+    }
+
+    const res = await fetch(`${API_URL}/me`, {
         credentials: "include"
     });
   

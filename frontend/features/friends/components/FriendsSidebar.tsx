@@ -6,11 +6,11 @@ export default function FriendsSidebar() {
     const {data: friends } = useFriends();
 
     return (
-        <div className="h-full">
+        <div className="h-full w-full">
           {friends && friends.length === 0 ? (
             <div>Aucun ami</div>
           ) : (
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col h-full w-full">
                 {
                     friends?.map( (friend: Friend) => (
                         <FriendItem key={friend.id} friend={friend} />

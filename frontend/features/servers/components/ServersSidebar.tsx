@@ -7,13 +7,14 @@ export default function ServersSidebar() {
     const { data: servers } = useServers();
 
     return (
-        <aside className="w-20 bg-amber-400 h-full">
+        <aside className="w-20 bg-gray-950 h-full">
             <DMButton />
 
-            {servers?.map( (server: Server) => (
-                <ServerItem key={server.id} server={server} />
-            ))}
-
+            <div className="flex flex-col bg-linear-to-b from-gray-800 to-gray-400 rounded-t-[10px]">
+                {servers?.map( (server: Server) => (
+                    <ServerItem key={server.id} server={server} />
+                ))}
+            </div>
         </aside>
     );
 }

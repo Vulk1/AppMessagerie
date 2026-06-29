@@ -40,7 +40,7 @@ export default function LoginClient() {
     }
 
     return(
-        <div className="flex flex-col  justify-center items-center min-h-screen relative">
+        <div className="flex flex-col justify-center items-center min-h-screen relative">
             <Image
             src="/images/background/fond2.webp"
             alt=""

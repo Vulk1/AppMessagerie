@@ -1,10 +1,15 @@
+"use client"
 import { DMConversation } from "@/types/chat.types";
 import Avatar from "@/features/ui/components/Avatar";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function DMItem({ conversation }: { conversation: DMConversation}) {
+    const pathname = usePathname();
+    const isActive = pathname === `/chat/me/${conversation.id}`;
 
     return (
-        <div className="w-full flex">
+        <Link className={`w-full flex ${isActive ? "bg-base-200" : "hover:bg-base-200"}`} href={`/chat/me/${conversation.id}`}>
             <div>
                 <Avatar user={conversation.participant}/>
             </div>
@@ -23,7 +28,7 @@ export default function DMItem({ conversation }: { conversation: DMConversation}
                 </div>
                 )}
             </div>
-        </div>
+        </Link>
     );
 
 }
