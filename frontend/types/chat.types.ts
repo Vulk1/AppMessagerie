@@ -55,6 +55,8 @@ export interface DMConversation {
 }
 
 export type ChatUIStateData = {
+    isDMSectionOpen: boolean;
+    isServersSectionOpen: boolean;
     selectedDMId: string | null;
     selectedServerId: string | null;
     selectedChannelId: string | null;

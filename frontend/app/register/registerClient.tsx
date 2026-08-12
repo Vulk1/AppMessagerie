@@ -10,6 +10,7 @@ import FormInput from "@/features/ui/components/FormInput"
 import Link from "next/link"
 import Image from "next/image"
 import { User, KeyRound, Mail, LockKeyhole } from "lucide-react";
+import apiClient from "@/lib/apiClient";
 
 
 export default function RegisterClient() {
@@ -24,7 +25,7 @@ export default function RegisterClient() {
 
     const onSubmit = async (data: RegisterInput) => {
         try{
-            const res = await fetch(process.env.NEXT_PUBLIC_API_REGISTER_ROUTE!, {
+            const res = await apiClient.request("/auth/register", {
                 method: "POST",
                 headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify({
@@ -52,7 +53,7 @@ export default function RegisterClient() {
                 router.push('/login');
             } else {
                 router.refresh();
-                router.push('/');
+                router.push('/chat');
             }
         }catch(error) {
             toast.error("Impossible de contacter le server");

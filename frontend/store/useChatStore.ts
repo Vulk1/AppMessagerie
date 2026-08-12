@@ -3,6 +3,8 @@ import type { ChatUIStateData } from "@/types/chat.types";
 
 
 type ChatUIStore = ChatUIStateData & {
+    setOpenDMSection: (toOpen: boolean) => void;
+    setServersSectionOpen: (toOpen: boolean) => void;
     setSelectedDMId: (id: string | null ) => void;
     setSelectedServer: (id: string | null) => void;
     setSelectedChannel: (id: string | null) => void;
@@ -15,9 +17,12 @@ type ChatUIStore = ChatUIStateData & {
     // -------------------
     // STATE INITIAL
     // -------------------
-    selectedDMId: null,
-    selectedServerId: null,
-    selectedChannelId: null,
+
+    isDMSectionOpen: true, // La Section DM est un "server interne" où sont stockés les DM
+    isServersSectionOpen: false, // La Section Servers est la section où on affiche le contenu d'un server
+    selectedDMId: null, // Sélection de la conversation privée
+    selectedServerId: null, // Sélection du server
+    selectedChannelId: null, // Sélection du channel
   
     messageDraftByChannel: {},
   
@@ -26,6 +31,20 @@ type ChatUIStore = ChatUIStateData & {
     // -------------------
     // ACTIONS NAVIGATION
     // -------------------
+
+    
+    setOpenDMSection: (toOpen) => 
+      set( (state) => ({
+        isDMSectionOpen : toOpen,
+        isServersSectionOpen : !toOpen,
+      })),
+
+    setServersSectionOpen: (toOpen) => 
+        set( (state) => ({
+          isServersSectionOpen : toOpen,
+          isDMSectionOpen : !toOpen,
+    }) ),
+
     setSelectedDMId: (DMId) => 
         set( {
             selectedDMId: DMId

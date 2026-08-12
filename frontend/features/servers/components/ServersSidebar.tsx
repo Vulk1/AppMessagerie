@@ -7,7 +7,7 @@ export default function ServersSidebar() {
     const { data: servers } = useServers();
 
     return (
-        <aside className="w-20 bg-gray-950 h-full">
+        <aside className="w-25 bg-gray-950 h-full">
             <DMButton />
 
             <div className="flex flex-col bg-linear-to-b from-gray-800 to-gray-400 rounded-t-[10px]">

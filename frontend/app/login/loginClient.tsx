@@ -35,7 +35,7 @@ export default function LoginClient() {
         return
     } else {
         router.refresh();
-        router.push('/');
+        router.push('/chat');
     }
     }
 

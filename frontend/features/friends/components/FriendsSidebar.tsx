@@ -1,3 +1,4 @@
+"use client";
 import { useFriends } from "../hooks/useFriends";
 import FriendItem from "./FriendItem";
 import type { Friend } from "@/types/chat.types";
