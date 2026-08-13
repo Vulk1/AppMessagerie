@@ -10,4 +10,12 @@
  */
 export type * from './models/User.js'
 export type * from './models/Friendship.js'
+export type * from './models/Server.js'
+export type * from './models/ServerMember.js'
+export type * from './models/Channel.js'
+export type * from './models/Message.js'
+export type * from './models/DMConversation.js'
+export type * from './models/DMParticipant.js'
+export type * from './models/DMMessage.js'
+export type * from './models/Attachment.js'
 export type * from './commonInputTypes.js'

@@ -29,10 +29,10 @@ export type UserMinAggregateOutputType = {
   email: string | null
   username: string | null
   password: string | null
+  avatar: string | null
   firstName: string | null
   lastName: string | null
   bio: string | null
-  avatar: string | null
   birthday: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,10 +43,10 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   username: string | null
   password: string | null
+  avatar: string | null
   firstName: string | null
   lastName: string | null
   bio: string | null
-  avatar: string | null
   birthday: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -57,10 +57,10 @@ export type UserCountAggregateOutputType = {
   email: number
   username: number
   password: number
+  avatar: number
   firstName: number
   lastName: number
   bio: number
-  avatar: number
   birthday: number
   createdAt: number
   updatedAt: number
@@ -73,10 +73,10 @@ export type UserMinAggregateInputType = {
   email?: true
   username?: true
   password?: true
+  avatar?: true
   firstName?: true
   lastName?: true
   bio?: true
-  avatar?: true
   birthday?: true
   createdAt?: true
   updatedAt?: true
@@ -87,10 +87,10 @@ export type UserMaxAggregateInputType = {
   email?: true
   username?: true
   password?: true
+  avatar?: true
   firstName?: true
   lastName?: true
   bio?: true
-  avatar?: true
   birthday?: true
   createdAt?: true
   updatedAt?: true
@@ -101,10 +101,10 @@ export type UserCountAggregateInputType = {
   email?: true
   username?: true
   password?: true
+  avatar?: true
   firstName?: true
   lastName?: true
   bio?: true
-  avatar?: true
   birthday?: true
   createdAt?: true
   updatedAt?: true
@@ -188,10 +188,10 @@ export type UserGroupByOutputType = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName: string | null
   lastName: string | null
   bio: string | null
-  avatar: string | null
   birthday: Date | null
   createdAt: Date
   updatedAt: Date
@@ -223,13 +223,18 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  avatar?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
-  avatar?: Prisma.StringNullableFilter<"User"> | string | null
   birthday?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  ownedServers?: Prisma.ServerListRelationFilter
+  serverMemberships?: Prisma.ServerMemberListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
+  dmParticipants?: Prisma.DMParticipantListRelationFilter
+  dmMessages?: Prisma.DMMessageListRelationFilter
   friendshipsSent?: Prisma.FriendshipListRelationFilter
   friendshipsReceived?: Prisma.FriendshipListRelationFilter
 }
@@ -239,13 +244,18 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   firstName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   birthday?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  ownedServers?: Prisma.ServerOrderByRelationAggregateInput
+  serverMemberships?: Prisma.ServerMemberOrderByRelationAggregateInput
+  messages?: Prisma.MessageOrderByRelationAggregateInput
+  dmParticipants?: Prisma.DMParticipantOrderByRelationAggregateInput
+  dmMessages?: Prisma.DMMessageOrderByRelationAggregateInput
   friendshipsSent?: Prisma.FriendshipOrderByRelationAggregateInput
   friendshipsReceived?: Prisma.FriendshipOrderByRelationAggregateInput
 }
@@ -258,13 +268,18 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringFilter<"User"> | string
+  avatar?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
-  avatar?: Prisma.StringNullableFilter<"User"> | string | null
   birthday?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  ownedServers?: Prisma.ServerListRelationFilter
+  serverMemberships?: Prisma.ServerMemberListRelationFilter
+  messages?: Prisma.MessageListRelationFilter
+  dmParticipants?: Prisma.DMParticipantListRelationFilter
+  dmMessages?: Prisma.DMMessageListRelationFilter
   friendshipsSent?: Prisma.FriendshipListRelationFilter
   friendshipsReceived?: Prisma.FriendshipListRelationFilter
 }, "id" | "email" | "username">
@@ -274,10 +289,10 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   firstName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   birthday?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -294,10 +309,10 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  avatar?: Prisma.StringWithAggregatesFilter<"User"> | string
   firstName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lastName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   birthday?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -308,13 +323,18 @@ export type UserCreateInput = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
   friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
   friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
 }
@@ -324,13 +344,18 @@ export type UserUncheckedCreateInput = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
   friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
   friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
 }
@@ -340,13 +365,18 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
   friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
   friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
 }
@@ -356,13 +386,18 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
   friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
   friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
 }
@@ -372,10 +407,10 @@ export type UserCreateManyInput = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -386,10 +421,10 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,10 +435,10 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -414,10 +449,10 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
-  avatar?: Prisma.SortOrder
   birthday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -428,10 +463,10 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
-  avatar?: Prisma.SortOrder
   birthday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -442,10 +477,10 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
-  avatar?: Prisma.SortOrder
   birthday?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -500,18 +535,93 @@ export type UserUpdateOneRequiredWithoutFriendshipsReceivedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFriendshipsReceivedInput, Prisma.UserUpdateWithoutFriendshipsReceivedInput>, Prisma.UserUncheckedUpdateWithoutFriendshipsReceivedInput>
 }
 
+export type UserCreateNestedOneWithoutOwnedServersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedServersInput, Prisma.UserUncheckedCreateWithoutOwnedServersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedServersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutOwnedServersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedServersInput, Prisma.UserUncheckedCreateWithoutOwnedServersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedServersInput
+  upsert?: Prisma.UserUpsertWithoutOwnedServersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedServersInput, Prisma.UserUpdateWithoutOwnedServersInput>, Prisma.UserUncheckedUpdateWithoutOwnedServersInput>
+}
+
+export type UserCreateNestedOneWithoutServerMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServerMembershipsInput, Prisma.UserUncheckedCreateWithoutServerMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServerMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutServerMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServerMembershipsInput, Prisma.UserUncheckedCreateWithoutServerMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServerMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutServerMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServerMembershipsInput, Prisma.UserUpdateWithoutServerMembershipsInput>, Prisma.UserUncheckedUpdateWithoutServerMembershipsInput>
+}
+
+export type UserCreateNestedOneWithoutMessagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessagesInput
+  upsert?: Prisma.UserUpsertWithoutMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMessagesInput, Prisma.UserUpdateWithoutMessagesInput>, Prisma.UserUncheckedUpdateWithoutMessagesInput>
+}
+
+export type UserCreateNestedOneWithoutDmParticipantsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDmParticipantsInput, Prisma.UserUncheckedCreateWithoutDmParticipantsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDmParticipantsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDmParticipantsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDmParticipantsInput, Prisma.UserUncheckedCreateWithoutDmParticipantsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDmParticipantsInput
+  upsert?: Prisma.UserUpsertWithoutDmParticipantsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDmParticipantsInput, Prisma.UserUpdateWithoutDmParticipantsInput>, Prisma.UserUncheckedUpdateWithoutDmParticipantsInput>
+}
+
+export type UserCreateNestedOneWithoutDmMessagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDmMessagesInput, Prisma.UserUncheckedCreateWithoutDmMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDmMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDmMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDmMessagesInput, Prisma.UserUncheckedCreateWithoutDmMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDmMessagesInput
+  upsert?: Prisma.UserUpsertWithoutDmMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDmMessagesInput, Prisma.UserUpdateWithoutDmMessagesInput>, Prisma.UserUncheckedUpdateWithoutDmMessagesInput>
+}
+
 export type UserCreateWithoutFriendshipsSentInput = {
   id?: string
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
   friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
 }
 
@@ -520,13 +630,18 @@ export type UserUncheckedCreateWithoutFriendshipsSentInput = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
   friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
 }
 
@@ -540,13 +655,18 @@ export type UserCreateWithoutFriendshipsReceivedInput = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
   friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
 }
 
@@ -555,13 +675,18 @@ export type UserUncheckedCreateWithoutFriendshipsReceivedInput = {
   email: string
   username: string
   password: string
+  avatar: string
   firstName?: string | null
   lastName?: string | null
   bio?: string | null
-  avatar?: string | null
   birthday?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
   friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
 }
 
@@ -586,13 +711,18 @@ export type UserUpdateWithoutFriendshipsSentInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
   friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
 }
 
@@ -601,13 +731,18 @@ export type UserUncheckedUpdateWithoutFriendshipsSentInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
   friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
@@ -627,13 +762,18 @@ export type UserUpdateWithoutFriendshipsReceivedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
   friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
 }
 
@@ -642,14 +782,499 @@ export type UserUncheckedUpdateWithoutFriendshipsReceivedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
   friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
+}
+
+export type UserCreateWithoutOwnedServersInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutOwnedServersInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutOwnedServersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedServersInput, Prisma.UserUncheckedCreateWithoutOwnedServersInput>
+}
+
+export type UserUpsertWithoutOwnedServersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOwnedServersInput, Prisma.UserUncheckedUpdateWithoutOwnedServersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedServersInput, Prisma.UserUncheckedCreateWithoutOwnedServersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOwnedServersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOwnedServersInput, Prisma.UserUncheckedUpdateWithoutOwnedServersInput>
+}
+
+export type UserUpdateWithoutOwnedServersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOwnedServersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserCreateWithoutServerMembershipsInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutServerMembershipsInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutServerMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutServerMembershipsInput, Prisma.UserUncheckedCreateWithoutServerMembershipsInput>
+}
+
+export type UserUpsertWithoutServerMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutServerMembershipsInput, Prisma.UserUncheckedUpdateWithoutServerMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutServerMembershipsInput, Prisma.UserUncheckedCreateWithoutServerMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutServerMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutServerMembershipsInput, Prisma.UserUncheckedUpdateWithoutServerMembershipsInput>
+}
+
+export type UserUpdateWithoutServerMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutServerMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserCreateWithoutMessagesInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutMessagesInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutMessagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
+}
+
+export type UserUpsertWithoutMessagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMessagesInput, Prisma.UserUncheckedUpdateWithoutMessagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMessagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMessagesInput, Prisma.UserUncheckedUpdateWithoutMessagesInput>
+}
+
+export type UserUpdateWithoutMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserCreateWithoutDmParticipantsInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmMessages?: Prisma.DMMessageCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutDmParticipantsInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmMessages?: Prisma.DMMessageUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutDmParticipantsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDmParticipantsInput, Prisma.UserUncheckedCreateWithoutDmParticipantsInput>
+}
+
+export type UserUpsertWithoutDmParticipantsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDmParticipantsInput, Prisma.UserUncheckedUpdateWithoutDmParticipantsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDmParticipantsInput, Prisma.UserUncheckedCreateWithoutDmParticipantsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDmParticipantsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDmParticipantsInput, Prisma.UserUncheckedUpdateWithoutDmParticipantsInput>
+}
+
+export type UserUpdateWithoutDmParticipantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmMessages?: Prisma.DMMessageUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDmParticipantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmMessages?: Prisma.DMMessageUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserCreateWithoutDmMessagesInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantCreateNestedManyWithoutUserInput
+  friendshipsSent?: Prisma.FriendshipCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipCreateNestedManyWithoutReceiverInput
+}
+
+export type UserUncheckedCreateWithoutDmMessagesInput = {
+  id?: string
+  email: string
+  username: string
+  password: string
+  avatar: string
+  firstName?: string | null
+  lastName?: string | null
+  bio?: string | null
+  birthday?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedServers?: Prisma.ServerUncheckedCreateNestedManyWithoutOwnerInput
+  serverMemberships?: Prisma.ServerMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  dmParticipants?: Prisma.DMParticipantUncheckedCreateNestedManyWithoutUserInput
+  friendshipsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutSenderInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutReceiverInput
+}
+
+export type UserCreateOrConnectWithoutDmMessagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDmMessagesInput, Prisma.UserUncheckedCreateWithoutDmMessagesInput>
+}
+
+export type UserUpsertWithoutDmMessagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDmMessagesInput, Prisma.UserUncheckedUpdateWithoutDmMessagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDmMessagesInput, Prisma.UserUncheckedCreateWithoutDmMessagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDmMessagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDmMessagesInput, Prisma.UserUncheckedUpdateWithoutDmMessagesInput>
+}
+
+export type UserUpdateWithoutDmMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUpdateManyWithoutUserNestedInput
+  friendshipsSent?: Prisma.FriendshipUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDmMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedServers?: Prisma.ServerUncheckedUpdateManyWithoutOwnerNestedInput
+  serverMemberships?: Prisma.ServerMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  dmParticipants?: Prisma.DMParticipantUncheckedUpdateManyWithoutUserNestedInput
+  friendshipsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutSenderNestedInput
+  friendshipsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 
@@ -658,11 +1283,21 @@ export type UserUncheckedUpdateWithoutFriendshipsReceivedInput = {
  */
 
 export type UserCountOutputType = {
+  ownedServers: number
+  serverMemberships: number
+  messages: number
+  dmParticipants: number
+  dmMessages: number
   friendshipsSent: number
   friendshipsReceived: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ownedServers?: boolean | UserCountOutputTypeCountOwnedServersArgs
+  serverMemberships?: boolean | UserCountOutputTypeCountServerMembershipsArgs
+  messages?: boolean | UserCountOutputTypeCountMessagesArgs
+  dmParticipants?: boolean | UserCountOutputTypeCountDmParticipantsArgs
+  dmMessages?: boolean | UserCountOutputTypeCountDmMessagesArgs
   friendshipsSent?: boolean | UserCountOutputTypeCountFriendshipsSentArgs
   friendshipsReceived?: boolean | UserCountOutputTypeCountFriendshipsReceivedArgs
 }
@@ -675,6 +1310,41 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOwnedServersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServerWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountServerMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServerMemberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDmParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DMParticipantWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDmMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DMMessageWhereInput
 }
 
 /**
@@ -697,13 +1367,18 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   username?: boolean
   password?: boolean
+  avatar?: boolean
   firstName?: boolean
   lastName?: boolean
   bio?: boolean
-  avatar?: boolean
   birthday?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  ownedServers?: boolean | Prisma.User$ownedServersArgs<ExtArgs>
+  serverMemberships?: boolean | Prisma.User$serverMembershipsArgs<ExtArgs>
+  messages?: boolean | Prisma.User$messagesArgs<ExtArgs>
+  dmParticipants?: boolean | Prisma.User$dmParticipantsArgs<ExtArgs>
+  dmMessages?: boolean | Prisma.User$dmMessagesArgs<ExtArgs>
   friendshipsSent?: boolean | Prisma.User$friendshipsSentArgs<ExtArgs>
   friendshipsReceived?: boolean | Prisma.User$friendshipsReceivedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -714,10 +1389,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   username?: boolean
   password?: boolean
+  avatar?: boolean
   firstName?: boolean
   lastName?: boolean
   bio?: boolean
-  avatar?: boolean
   birthday?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -728,10 +1403,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   username?: boolean
   password?: boolean
+  avatar?: boolean
   firstName?: boolean
   lastName?: boolean
   bio?: boolean
-  avatar?: boolean
   birthday?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -742,17 +1417,22 @@ export type UserSelectScalar = {
   email?: boolean
   username?: boolean
   password?: boolean
+  avatar?: boolean
   firstName?: boolean
   lastName?: boolean
   bio?: boolean
-  avatar?: boolean
   birthday?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "password" | "firstName" | "lastName" | "bio" | "avatar" | "birthday" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "password" | "avatar" | "firstName" | "lastName" | "bio" | "birthday" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ownedServers?: boolean | Prisma.User$ownedServersArgs<ExtArgs>
+  serverMemberships?: boolean | Prisma.User$serverMembershipsArgs<ExtArgs>
+  messages?: boolean | Prisma.User$messagesArgs<ExtArgs>
+  dmParticipants?: boolean | Prisma.User$dmParticipantsArgs<ExtArgs>
+  dmMessages?: boolean | Prisma.User$dmMessagesArgs<ExtArgs>
   friendshipsSent?: boolean | Prisma.User$friendshipsSentArgs<ExtArgs>
   friendshipsReceived?: boolean | Prisma.User$friendshipsReceivedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -763,6 +1443,11 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    ownedServers: Prisma.$ServerPayload<ExtArgs>[]
+    serverMemberships: Prisma.$ServerMemberPayload<ExtArgs>[]
+    messages: Prisma.$MessagePayload<ExtArgs>[]
+    dmParticipants: Prisma.$DMParticipantPayload<ExtArgs>[]
+    dmMessages: Prisma.$DMMessagePayload<ExtArgs>[]
     friendshipsSent: Prisma.$FriendshipPayload<ExtArgs>[]
     friendshipsReceived: Prisma.$FriendshipPayload<ExtArgs>[]
   }
@@ -771,10 +1456,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     username: string
     password: string
+    avatar: string
     firstName: string | null
     lastName: string | null
     bio: string | null
-    avatar: string | null
     birthday: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1172,6 +1857,11 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  ownedServers<T extends Prisma.User$ownedServersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedServersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serverMemberships<T extends Prisma.User$serverMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serverMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServerMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  messages<T extends Prisma.User$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dmParticipants<T extends Prisma.User$dmParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dmParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DMParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dmMessages<T extends Prisma.User$dmMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dmMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DMMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   friendshipsSent<T extends Prisma.User$friendshipsSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendshipsSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   friendshipsReceived<T extends Prisma.User$friendshipsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendshipsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1207,10 +1897,10 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly avatar: Prisma.FieldRef<"User", 'String'>
   readonly firstName: Prisma.FieldRef<"User", 'String'>
   readonly lastName: Prisma.FieldRef<"User", 'String'>
   readonly bio: Prisma.FieldRef<"User", 'String'>
-  readonly avatar: Prisma.FieldRef<"User", 'String'>
   readonly birthday: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -1599,6 +2289,126 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.ownedServers
+ */
+export type User$ownedServersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Server
+   */
+  select?: Prisma.ServerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Server
+   */
+  omit?: Prisma.ServerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServerInclude<ExtArgs> | null
+  where?: Prisma.ServerWhereInput
+  orderBy?: Prisma.ServerOrderByWithRelationInput | Prisma.ServerOrderByWithRelationInput[]
+  cursor?: Prisma.ServerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServerScalarFieldEnum | Prisma.ServerScalarFieldEnum[]
+}
+
+/**
+ * User.serverMemberships
+ */
+export type User$serverMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServerMember
+   */
+  select?: Prisma.ServerMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServerMember
+   */
+  omit?: Prisma.ServerMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServerMemberInclude<ExtArgs> | null
+  where?: Prisma.ServerMemberWhereInput
+  orderBy?: Prisma.ServerMemberOrderByWithRelationInput | Prisma.ServerMemberOrderByWithRelationInput[]
+  cursor?: Prisma.ServerMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServerMemberScalarFieldEnum | Prisma.ServerMemberScalarFieldEnum[]
+}
+
+/**
+ * User.messages
+ */
+export type User$messagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+}
+
+/**
+ * User.dmParticipants
+ */
+export type User$dmParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DMParticipant
+   */
+  select?: Prisma.DMParticipantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DMParticipant
+   */
+  omit?: Prisma.DMParticipantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DMParticipantInclude<ExtArgs> | null
+  where?: Prisma.DMParticipantWhereInput
+  orderBy?: Prisma.DMParticipantOrderByWithRelationInput | Prisma.DMParticipantOrderByWithRelationInput[]
+  cursor?: Prisma.DMParticipantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DMParticipantScalarFieldEnum | Prisma.DMParticipantScalarFieldEnum[]
+}
+
+/**
+ * User.dmMessages
+ */
+export type User$dmMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DMMessage
+   */
+  select?: Prisma.DMMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DMMessage
+   */
+  omit?: Prisma.DMMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DMMessageInclude<ExtArgs> | null
+  where?: Prisma.DMMessageWhereInput
+  orderBy?: Prisma.DMMessageOrderByWithRelationInput | Prisma.DMMessageOrderByWithRelationInput[]
+  cursor?: Prisma.DMMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DMMessageScalarFieldEnum | Prisma.DMMessageScalarFieldEnum[]
 }
 
 /**

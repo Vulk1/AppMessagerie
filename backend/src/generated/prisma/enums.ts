@@ -16,3 +16,30 @@ export const FriendshipStatus = {
 } as const
 
 export type FriendshipStatus = (typeof FriendshipStatus)[keyof typeof FriendshipStatus]
+
+
+export const ServerRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER'
+} as const
+
+export type ServerRole = (typeof ServerRole)[keyof typeof ServerRole]
+
+
+export const ChannelType = {
+  TEXT: 'TEXT',
+  VOICE: 'VOICE'
+} as const
+
+export type ChannelType = (typeof ChannelType)[keyof typeof ChannelType]
+
+
+export const AttachmentType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO',
+  FILE: 'FILE'
+} as const
+
+export type AttachmentType = (typeof AttachmentType)[keyof typeof AttachmentType]

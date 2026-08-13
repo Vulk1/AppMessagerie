@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
+import { authenticate } from "./middlewares/authentificate.js";
 import authRoute from "./routes/auth.js";
+import usersRoute from "./routes/users.js";
+import friendsRoute from "./routes/friends.js";
 
 const app = express();
 
@@ -26,5 +29,7 @@ app.use(
 app.use(express.json());
 
 app.use('/api/auth', authRoute);
+app.use('/api/user', authenticate, usersRoute);
+app.use('/api/friends', authenticate, friendsRoute)
 
 export default app;

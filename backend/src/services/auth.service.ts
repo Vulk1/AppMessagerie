@@ -43,7 +43,7 @@ export const loginService = async ({ identifier, password }: LoginInput) => {
     };
 };
 
-export const registerService = async ({email, username, password, confirmPassword}: RegisterInput) => {
+export const registerService = async ({email, username, password}: RegisterInput) => {
     console.log(`Tentative de création de compte de ${email}`);
     const user = await prisma.user.findFirst({
         where: {

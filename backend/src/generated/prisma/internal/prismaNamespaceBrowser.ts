@@ -52,7 +52,15 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Friendship: 'Friendship'
+  Friendship: 'Friendship',
+  Server: 'Server',
+  ServerMember: 'ServerMember',
+  Channel: 'Channel',
+  Message: 'Message',
+  DMConversation: 'DMConversation',
+  DMParticipant: 'DMParticipant',
+  DMMessage: 'DMMessage',
+  Attachment: 'Attachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -76,10 +84,10 @@ export const UserScalarFieldEnum = {
   email: 'email',
   username: 'username',
   password: 'password',
+  avatar: 'avatar',
   firstName: 'firstName',
   lastName: 'lastName',
   bio: 'bio',
-  avatar: 'avatar',
   birthday: 'birthday',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -98,6 +106,95 @@ export const FriendshipScalarFieldEnum = {
 } as const
 
 export type FriendshipScalarFieldEnum = (typeof FriendshipScalarFieldEnum)[keyof typeof FriendshipScalarFieldEnum]
+
+
+export const ServerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServerScalarFieldEnum = (typeof ServerScalarFieldEnum)[keyof typeof ServerScalarFieldEnum]
+
+
+export const ServerMemberScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  serverId: 'serverId',
+  role: 'role',
+  joinedAt: 'joinedAt'
+} as const
+
+export type ServerMemberScalarFieldEnum = (typeof ServerMemberScalarFieldEnum)[keyof typeof ServerMemberScalarFieldEnum]
+
+
+export const ChannelScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  serverId: 'serverId',
+  createdAt: 'createdAt'
+} as const
+
+export type ChannelScalarFieldEnum = (typeof ChannelScalarFieldEnum)[keyof typeof ChannelScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  senderId: 'senderId',
+  channelId: 'channelId',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const DMConversationScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt'
+} as const
+
+export type DMConversationScalarFieldEnum = (typeof DMConversationScalarFieldEnum)[keyof typeof DMConversationScalarFieldEnum]
+
+
+export const DMParticipantScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  conversationId: 'conversationId',
+  lastReadMessageId: 'lastReadMessageId',
+  joinedAt: 'joinedAt'
+} as const
+
+export type DMParticipantScalarFieldEnum = (typeof DMParticipantScalarFieldEnum)[keyof typeof DMParticipantScalarFieldEnum]
+
+
+export const DMMessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  senderId: 'senderId',
+  conversationId: 'conversationId',
+  createdAt: 'createdAt'
+} as const
+
+export type DMMessageScalarFieldEnum = (typeof DMMessageScalarFieldEnum)[keyof typeof DMMessageScalarFieldEnum]
+
+
+export const AttachmentScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  thumbnailUrl: 'thumbnailUrl',
+  type: 'type',
+  width: 'width',
+  height: 'height',
+  messageId: 'messageId',
+  createdAt: 'createdAt'
+} as const
+
+export type AttachmentScalarFieldEnum = (typeof AttachmentScalarFieldEnum)[keyof typeof AttachmentScalarFieldEnum]
 
 
 export const SortOrder = {

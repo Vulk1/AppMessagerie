@@ -49,3 +49,43 @@ export type User = Prisma.UserModel
  * 
  */
 export type Friendship = Prisma.FriendshipModel
+/**
+ * Model Server
+ * 
+ */
+export type Server = Prisma.ServerModel
+/**
+ * Model ServerMember
+ * 
+ */
+export type ServerMember = Prisma.ServerMemberModel
+/**
+ * Model Channel
+ * 
+ */
+export type Channel = Prisma.ChannelModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model DMConversation
+ * 
+ */
+export type DMConversation = Prisma.DMConversationModel
+/**
+ * Model DMParticipant
+ * 
+ */
+export type DMParticipant = Prisma.DMParticipantModel
+/**
+ * Model DMMessage
+ * 
+ */
+export type DMMessage = Prisma.DMMessageModel
+/**
+ * Model Attachment
+ * 
+ */
+export type Attachment = Prisma.AttachmentModel

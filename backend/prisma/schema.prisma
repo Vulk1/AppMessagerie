@@ -37,12 +37,12 @@ model User {
   email     String   @unique
   username  String   @unique
   password  String
+  avatar    String
 
   // Champs optionnels
   firstName String?
   lastName  String?
   bio       String?
-  avatar    String?
   birthday  DateTime?
 
   ownedServers       Server[]  
