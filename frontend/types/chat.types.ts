@@ -18,6 +18,8 @@ export interface Channel {
     serverId: string;
 }
 
+
+
 export interface User {
     id: string;
     email: string;
@@ -30,12 +32,12 @@ export interface User {
     bio: string | null;
     birthday: string | null;
 
-    status: UserStatus;
+    //status à implémenter plus tard
 }
 
 export type UserPreview = Pick<
   User,
-  "id" | "username" | "avatar" | "status"
+  "id" | "username" | "avatar" // status à ajouter plus tard
 >
 
 export type Friend = UserPreview;

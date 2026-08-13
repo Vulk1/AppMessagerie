@@ -8,7 +8,7 @@ const handler = NextAuth({
     providers: [
         CredentialsProvider({
         name: "Credentials",
-        credentials: {} // On crée une page login personnalisé
+        credentials: {} // On crée une page login personnalisée
         ,
         async authorize(credentials) {
             if(!credentials) return null;

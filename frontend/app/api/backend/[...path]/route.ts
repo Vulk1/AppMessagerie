@@ -25,7 +25,7 @@ async function handler(
      *
      * on ne veut pas récupérer le payload sous forme d'objet.
      * On veut récupérer le JWT original sous forme de string
-     * afin de le transmettre à Express.
+     * afin de le transmettre à Express (backend).
      */
     const accessToken = await getToken({
         req,
@@ -33,14 +33,9 @@ async function handler(
         raw: true,
     });
 
-    const headers = new Headers();
+    const headers = new Headers(req.headers);
 
-    // On transmet le Content-Type original s'il existe.
-    const contentType = req.headers.get("content-type");
-
-    if (contentType) {
-        headers.set("Content-Type", contentType);
-    }
+    headers.delete("cookie"); // On n'a pas besoin de transmettre les cookies de NextAuth pour notre backend
 
     /*
      * Le navigateur ne contrôle jamais directement Authorization.
