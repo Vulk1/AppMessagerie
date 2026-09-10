@@ -18,3 +18,9 @@ export type UserPreview = Pick<
   "id" | "username" | "avatar"
 >
 
+export interface ServerPreview {
+  id: string,
+  name: string,
+  icon: string | null
+}
+

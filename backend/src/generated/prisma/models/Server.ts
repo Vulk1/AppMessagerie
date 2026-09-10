@@ -209,10 +209,10 @@ export type ServerOrderByWithRelationInput = {
 
 export type ServerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   AND?: Prisma.ServerWhereInput | Prisma.ServerWhereInput[]
   OR?: Prisma.ServerWhereInput[]
   NOT?: Prisma.ServerWhereInput | Prisma.ServerWhereInput[]
-  name?: Prisma.StringFilter<"Server"> | string
   icon?: Prisma.StringNullableFilter<"Server"> | string | null
   ownerId?: Prisma.StringFilter<"Server"> | string
   createdAt?: Prisma.DateTimeFilter<"Server"> | Date | string
@@ -220,7 +220,7 @@ export type ServerWhereUniqueInput = Prisma.AtLeast<{
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.ServerMemberListRelationFilter
   channels?: Prisma.ChannelListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type ServerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

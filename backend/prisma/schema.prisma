@@ -79,7 +79,7 @@ model Friendship {
 
 model Server {
   id   String @id @default(uuid())
-  name String
+  name String @unique
   icon String?
 
   ownerId String
