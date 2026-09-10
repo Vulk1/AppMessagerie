@@ -1,11 +1,14 @@
 import DMSidebar from "@/features/dm/components/DMSidebar";
 import FriendsSidebar from "@/features/friends/components/FriendsSidebar";
+import UserPanel from "@/features/user/components/UserPanel";
 import Link from "next/link";
+
+
 
 export default function DMLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex">
-            <div className="flex flex-col h-full flex-1">
+            <div className="flex flex-col h-full flex-1 relative">
                 <div className="flex-1">
                     <Link href={"/chat/me/friends"}>
                         Amis
@@ -16,7 +19,7 @@ export default function DMLayout({ children }: { children: React.ReactNode }) {
                 </div>
                 <div className="flex-2">
                     <DMSidebar />
-                </div>
+                </div>             
             </div>
             <div className="flex-3">
                 {children}

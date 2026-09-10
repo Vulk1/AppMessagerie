@@ -1,12 +1,9 @@
-import { API_URL } from "@/lib/api";
+import apiClient from "@/lib/apiClient";
 
 export async function addFriend(username: string) {
-  const res = await fetch(`${API_URL}/friends/add`, {
+
+  const res = await apiClient.request("/friends/add", {
     method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify({ username }),
   });
 

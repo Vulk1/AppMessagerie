@@ -27,7 +27,6 @@ export default function RegisterClient() {
         try{
             const res = await apiClient.request("/auth/register", {
                 method: "POST",
-                headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify({
                     email: data.email,
                     username: data.username,
@@ -53,7 +52,7 @@ export default function RegisterClient() {
                 router.push('/login');
             } else {
                 router.refresh();
-                router.push('/chat');
+                router.push('/chat/me/friends');
             }
         }catch(error) {
             toast.error("Impossible de contacter le server");
