@@ -1,8 +1,12 @@
 "use client";
 
-import { id } from "zod/locales";
 import Modal from "./Modal";
 import { useForm } from "react-hook-form";
+import { uploadFileToR2 } from "@/lib/uploadToR2";
+import { createServer,
+        getServerIconUploadUrl,
+        updateServerIcon
+ } from "@/services/servers";
 
 type CreateServerForm = {
     name: string;
@@ -26,9 +30,25 @@ export default function CreateServerModal() {
     const onSubmit = async (data: CreateServerForm) => {
         try {
             const fileIcon = data.icon?.[0];
-            console.log(data);
-
-            // appel API ici
+    
+            // 1. Créer le serveur
+            const server = await createServer(data.name);
+    
+            // 2. S'il y a une icône
+            if (fileIcon) {
+                // demander URL pré-signée
+                const uploadUrl  = await getServerIconUploadUrl(
+                    server.id,
+                    fileIcon.type
+                );
+    
+                // upload générique
+                await uploadFileToR2(fileIcon, uploadUrl);
+    
+                // finaliser côté backend
+                await updateServerIcon(server.id);
+            }
+    
         } catch (error) {
             console.error(error);
         }
