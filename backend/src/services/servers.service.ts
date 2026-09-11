@@ -66,4 +66,25 @@ export async function hasServerWritePermission(
             return false;
 
         return serverMembership.role === ServerRole.OWNER || serverMembership.role === ServerRole.ADMIN;
-    }
+}
+
+export async function updateServerIcon(serverId : string ) : Promise<ServerPreview>
+{
+    const key = `servers/${serverId}/icon`;
+
+    const server = await prisma.server.update({
+        where : {
+            id: serverId,
+        },
+        data : {
+            icon: key,
+        },
+        select : {
+            id: true,
+            name: true,
+            icon: true,
+        }
+    });
+
+    return server;
+}

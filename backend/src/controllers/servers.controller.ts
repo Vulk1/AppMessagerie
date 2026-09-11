@@ -1,14 +1,18 @@
-import { Request, Response } from "express";
-import {createServer as createServerService, hasServerWritePermission} from "../services/servers.service.js";
+import { 
+    Request, 
+    Response } 
+    from "express";
+import {
+    createServer as createServerService, 
+    hasServerWritePermission,
+    updateServerIcon as updateServerIconService } 
+    from "../services/servers.service.js";
+import { createPresignedUploadUrl } 
+    from "../services/r2.service.js";
 
-const allowedTypes = [
-    "image/png",
-    "image/jpeg",
-    "image/webp",
-];
-
-
-export async function createServer(req: Request, res: Response) {
+export async function createServer(
+    req: Request, 
+    res: Response ){
 
     try {
         const { name } = req.body;
@@ -21,13 +25,17 @@ export async function createServer(req: Request, res: Response) {
 
         return res.status(201).json(server);
     } catch (error) {
-        // gestion de l'erreur
+        // gestion d'erreurs
 
-        return res.status(500);
+        return res.status(500).json({
+            message: "Erreur interne du serveur",
+        });
     }
 }
 
-export async function createServerIconUpload(req: Request<{ serverId: string }>, res: Response) {
+export async function createServerIconUpload(
+    req: Request<{ serverId: string }>, 
+    res: Response ){
 
     try {
         const serverId = req.params.serverId;
@@ -40,8 +48,13 @@ export async function createServerIconUpload(req: Request<{ serverId: string }>,
         }
 
         const { contentType } = req.body;
+        const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        ];
 
-        // On vérifie bien que c'est une image avec les formats définis
+        // On vérifie que le Content-Type fait partie des formats autorisés
         if(!contentType || !allowedTypes.includes(contentType)) {
             return res.status(400).json({
                 message: "Format d'image non supporté",
@@ -50,16 +63,45 @@ export async function createServerIconUpload(req: Request<{ serverId: string }>,
 
         const key = `servers/${serverId}/icon`; //clé de l'image pour la génération d'une url présignée
 
-        
+        const uploadUrl = await createPresignedUploadUrl({
+            key, 
+            contentType
+        });
 
-
+        return res.status(200).json({
+            uploadUrl,
+        });
 
     } catch (error) {
-        return res.status(500);
+        // Gestion d'erreurs
+        return res.status(500).json({
+            message: "Erreur interne du serveur",
+        });
     }
 }
 
+export async function updateServerIcon(
+    req: Request<{serverId: string}>, 
+    res: Response){
 
+        try {
+            const serverId = req.params.serverId;
+            const userId = req.user!.sub;
+            
+            const perm = await hasServerWritePermission( {userId, serverId} ); 
 
+            if(!perm) {
+                return res.status(403).json({
+                    message: "Permissions insuffisantes"});
+            }
 
+           const server = await updateServerIconService(serverId);
 
+           return res.status(200).json(server);
+
+        } catch(error) {
+            return res.status(500).json({
+                message: "Erreur interne du serveur",
+            });
+        }
+}
