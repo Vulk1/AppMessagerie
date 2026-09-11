@@ -5,10 +5,12 @@ import {
 import {
     createServer as createServerService, 
     hasServerWritePermission,
-    updateServerIcon as updateServerIconService } 
+    updateServerIcon as updateServerIconService,
+    getUserServers } 
     from "../services/servers.service.js";
 import { createPresignedUploadUrl } 
     from "../services/r2.service.js";
+import { ServerPreview } from "../types/chat.types.js";
 
 export async function createServer(
     req: Request, 
@@ -104,4 +106,22 @@ export async function updateServerIcon(
                 message: "Erreur interne du serveur",
             });
         }
+}
+
+export async function getServers(
+    req: Request,
+    res: Response
+) {
+    try {
+        const userId = req.user!.sub;
+        const servers = await getUserServers(userId);
+
+        return res.status(200).json(servers);
+    } catch(error) {
+        console.error(error);
+
+        return res.status(500).json({
+            message: "Erreur interne du serveur",
+        });
+    }
 }

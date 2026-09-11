@@ -88,3 +88,21 @@ export async function updateServerIcon(serverId : string ) : Promise<ServerPrevi
 
     return server;
 }
+
+export async function getUserServers(userId: string): Promise<ServerPreview[]>{
+
+    return prisma.server.findMany({
+        where : {
+            members : {
+                some : {
+                    userId
+                },
+            },
+        },
+        select : {
+            id : true,
+            name: true,
+            icon : true,
+        },
+    });
+}
