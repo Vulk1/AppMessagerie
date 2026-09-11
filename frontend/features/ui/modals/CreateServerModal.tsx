@@ -2,6 +2,7 @@
 
 import Modal from "./Modal";
 import { useForm } from "react-hook-form";
+import useCreateServer from "@/features/servers/hooks/useCreateServer";
 import { uploadFileToR2 } from "@/lib/uploadToR2";
 import { createServer,
         getServerIconUploadUrl,
@@ -15,6 +16,8 @@ type CreateServerForm = {
 
 
 export default function CreateServerModal() {
+
+    const createServerMutation = useCreateServer();
 
     const {
         register,
@@ -31,23 +34,12 @@ export default function CreateServerModal() {
         try {
             const fileIcon = data.icon?.[0];
     
-            // 1. Créer le serveur
-            const server = await createServer(data.name);
+            await createServerMutation.mutateAsync({
+                name: data.name,
+                icon: fileIcon,
+            });
     
-            // 2. S'il y a une icône
-            if (fileIcon) {
-                // demander URL pré-signée
-                const uploadUrl  = await getServerIconUploadUrl(
-                    server.id,
-                    fileIcon.type
-                );
-    
-                // upload générique
-                await uploadFileToR2(fileIcon, uploadUrl);
-    
-                // finaliser côté backend
-                await updateServerIcon(server.id);
-            }
+            reset();
     
         } catch (error) {
             console.error(error);
