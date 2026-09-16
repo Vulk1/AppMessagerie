@@ -4,13 +4,15 @@ import {
     from "express";
 import {
     createServer as createServerService, 
-    hasServerWritePermission,
     updateServerIcon as updateServerIconService,
-    getUserServers } 
+    getUserServers,
+    getServerDetails as getServerDetailsService,
+    getServerChannels as getServerChannelsService
+    } 
     from "../services/servers.service.js";
 import { createPresignedUploadUrl } 
     from "../services/r2.service.js";
-import { ServerPreview } from "../types/chat.types.js";
+
 
 export async function createServer(
     req: Request, 
@@ -41,15 +43,8 @@ export async function createServerIconUpload(
 
     try {
         const serverId = req.params.serverId;
-        const userId = req.user!.sub;
-        
-        const perm = await hasServerWritePermission( {userId, serverId} ); 
-
-        if(!perm) {
-            return res.status(403).json({message: "Permission déclinée"});
-        }
-
         const { contentType } = req.body;
+
         const allowedTypes = [
         "image/png",
         "image/jpeg",
@@ -87,16 +82,8 @@ export async function updateServerIcon(
     res: Response){
 
         try {
-            const serverId = req.params.serverId;
-            const userId = req.user!.sub;
+            const { serverId }= req.params;
             
-            const perm = await hasServerWritePermission( {userId, serverId} ); 
-
-            if(!perm) {
-                return res.status(403).json({
-                    message: "Permissions insuffisantes"});
-            }
-
            const server = await updateServerIconService(serverId);
 
            return res.status(200).json(server);
@@ -120,6 +107,54 @@ export async function getServers(
     } catch(error) {
         console.error(error);
 
+        return res.status(500).json({
+            message: "Erreur interne du serveur",
+        });
+    }
+}
+
+export async function getServerDetails(
+    req: Request<{ serverId: string }>,
+    res: Response
+) {
+    try {
+        const serverId = req.params.serverId;
+        
+        const serverDetails = await getServerDetailsService(serverId);
+
+        return res.status(200).json(serverDetails);
+
+    } catch(error) {
+        // gestion d'erreurs
+        if (error instanceof Error && error.message === "Serveur introuvable") {
+            return res.status(404).json({
+                message: "Serveur introuvable",
+            });
+        }
+        return res.status(500).json({
+            message: "Erreur interne du serveur",
+        });
+    }
+}
+
+export async function getServerChannels(
+    req: Request<{ serverId: string }>,
+    res: Response
+) {
+    try {
+        const serverId = req.params.serverId;
+        
+        const channels = await getServerChannelsService(serverId);
+
+        return res.status(200).json(channels);
+
+    } catch(error) {
+        // gestion d'erreurs
+        if (error instanceof Error && error.message === "Serveur introuvable") {
+            return res.status(404).json({
+                message: "Serveur introuvable",
+            });
+        }
         return res.status(500).json({
             message: "Erreur interne du serveur",
         });

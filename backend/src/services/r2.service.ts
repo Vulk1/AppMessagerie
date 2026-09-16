@@ -23,3 +23,9 @@ export async function createPresignedUploadUrl({
 
     return uploadUrl;
 }
+
+export function getR2PublicUrl(key: string | null): string | null {
+    if (!key) return null;
+
+    return `${process.env.R2_PUBLIC_BASE_URL}/${key}`;
+}

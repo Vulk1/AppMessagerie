@@ -1,6 +1,7 @@
 import prisma from "../lib/prisma.js";
 import { ServerRole } from "../generated/prisma/client.js";
-import type { ServerPreview } from "../types/chat.types.js";
+import type { ServerDetails, ServerPreview, Channel } from "../types/chat.types.js";
+import { getR2PublicUrl } from "./r2.service.js";
 
 
 export async function createServer(
@@ -22,50 +23,40 @@ export async function createServer(
         throw new Error("Un serveur porte déjà ce nom");
     }
 
-    const server = await prisma.server.create({
-        data: {
-          name,
-          ownerId: ownerId,
-      
-          members: {
-            create: {
-              userId: ownerId,
-              role: ServerRole.OWNER,
-            },
-          },
-        },
-        select : {
-            id : true,
-            name: true,
-            icon: true
-        }
-      });
+    const server = await prisma.$transaction(async (tx) => {
+        // Création du serveur + ajout du propriétaire comme membre
+        const server = await tx.server.create({
+            data: {
+                name, 
+                ownerId,
 
-      return server;
-    
-}
-
-export async function hasServerWritePermission(
-    {userId, serverId}:
-    {userId: string, serverId: string}) 
-    : Promise<boolean> 
-    {
-        const serverMembership = await prisma.serverMember.findUnique({
-            where : {
-                userId_serverId: {
-                    userId,
-                    serverId
-                }
+                members : {
+                    create : {
+                        userId: ownerId,
+                        role: ServerRole.OWNER
+                    },
+                },
             },
-            select : {
-                role: true
-            }
+            select: {
+                id: true,
+                name: true,
+                icon: true,
+            },
         });
 
-        if(!serverMembership)
-            return false;
+        // Création du channel général par défaut
+        await tx.channel.create({
+            data: {
+                name: "général",
+                serverId: server.id
+            },
+        });
 
-        return serverMembership.role === ServerRole.OWNER || serverMembership.role === ServerRole.ADMIN;
+        return server;
+
+    });
+    
+    return toServerPreview(server);
 }
 
 export async function updateServerIcon(serverId : string ) : Promise<ServerPreview>
@@ -86,12 +77,12 @@ export async function updateServerIcon(serverId : string ) : Promise<ServerPrevi
         }
     });
 
-    return server;
+    return toServerPreview(server);
 }
 
 export async function getUserServers(userId: string): Promise<ServerPreview[]>{
-
-    return prisma.server.findMany({
+    
+    const servers = await prisma.server.findMany({
         where : {
             members : {
                 some : {
@@ -105,4 +96,54 @@ export async function getUserServers(userId: string): Promise<ServerPreview[]>{
             icon : true,
         },
     });
+
+    return servers.map(toServerPreview);  
 }
+
+export async function getServerDetails(serverId: string): Promise<ServerDetails>{
+    const server = await prisma.server.findUnique({
+        where : {
+            id: serverId
+        },
+        select: {
+            id: true,
+            name: true,
+            icon: true,
+            ownerId: true,
+            createdAt: true,
+        }
+    });
+
+    if (!server) {
+        throw new Error("Serveur introuvable");
+    }
+
+    return server;
+}
+
+export async function getServerChannels(serverId: string): Promise<Channel[]> {
+    const channels = await prisma.channel.findMany({
+        where: {
+            serverId
+        },
+        select : {
+            id: true,
+            name: true,
+            serverId: true,
+            type: true,
+            createdAt: true
+        }
+    });
+
+    return channels;
+}
+
+function toServerPreview(server: ServerPreview): ServerPreview {
+    return {
+      ...server,
+      icon: server.icon
+        ? getR2PublicUrl(server.icon)
+        : null,
+    };
+}
+

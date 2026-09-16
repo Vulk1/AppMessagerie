@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import friendsRoute from "./routes/friends.js";
 import serversRoute from "./routes/servers.js";
+import channelsRoute from "./routes/channels.js";
 
 const app = express();
 
@@ -33,5 +34,6 @@ app.use('/api/auth', authRoute);
 app.use('/api/user', authenticate, usersRoute);
 app.use('/api/friends', authenticate, friendsRoute);
 app.use('/api/servers', authenticate, serversRoute);
+app.use('/api/channels', authenticate, channelsRoute);
 
 export default app;
