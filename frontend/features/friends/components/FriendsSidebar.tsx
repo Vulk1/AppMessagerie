@@ -3,11 +3,14 @@ import { useFriends } from "../hooks/useFriends";
 import FriendItem from "./FriendItem";
 import type { Friend } from "@/types/chat.types";
 
-export default function FriendsSidebar() {
+export default function FriendsSidebar({
+  className}:{
+    className: string
+  }) {
     const {data: friends } = useFriends();
 
     return (
-        <div className="h-full w-full">
+        <div className={`h-full w-full ${className}`}>
           {friends && friends.length === 0 ? (
             <div>Aucun ami</div>
           ) : (

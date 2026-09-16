@@ -8,7 +8,7 @@ import { fetchMe } from "@/features/user/api/fetchMe";
 import { fetchFriends } from "@/features/friends/api/fetchFriends";
 import { fetchServers } from "@/features/servers/api/fetchServers";
 
-export default function ChatLayout({ children }: {children : React.ReactNode}) {
+export default function ChatClientLayout({ children }: {children : React.ReactNode}) {
 
   const queryClient = useQueryClient();
 
@@ -31,7 +31,7 @@ export default function ChatLayout({ children }: {children : React.ReactNode}) {
     }
   
     preload();
-  }, [queryClient])
+  }, [queryClient]);
 
     return (
       <div className="flex h-screen relative">

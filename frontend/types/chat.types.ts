@@ -10,6 +10,14 @@ export interface Server {
     icon?: string;
 }
 
+export interface ServerDetails {
+    id: string,
+    name : string,
+    icon: string | null,
+    ownerId: string,
+    createdAt?: Date | null,
+}
+
 export interface Channel {
     id: string;
     name: string;
@@ -41,18 +49,31 @@ export type UserPreview = Pick<
 
 export type Friend = UserPreview;
 
-export interface MessagePreview {
+export interface MessageDTO {
     id: string;
-    content: string;
-    attachmentType?: AttachmentType;
+    content: string | null;
+    senderId: string;
+
+    sender: {
+        id: string;
+        username: string;
+        avatar: string | null;
+    };
+
+    channelId: string;
+    attachments: AttachmentDTO[];
     createdAt: string;
 }
 
-export interface DMConversation {
+export interface AttachmentDTO {
     id: string;
-    participant: UserPreview;
-    lastMessage: MessagePreview | null
-    unreadCount: number;
+    messageId: string;
+    url: string;
+    thumbnailUrl: string | null;
+    type: AttachmentType;
+    width: number | null;
+    height: number | null;
+    createdAt: string;
 }
 
 export type ChatUIStateData = {
@@ -64,3 +85,8 @@ export type ChatUIStateData = {
     messageDraftByChannel: Record<string, string>;
     isSidebarOpen: boolean;
 };
+
+export interface MessagesPageDTO {
+    messages: MessageDTO[];
+    nextCursor: string | null;
+}

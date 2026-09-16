@@ -37,7 +37,6 @@ export default function useCreateServer() {
 
             return server;
         },
-
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ["servers"],

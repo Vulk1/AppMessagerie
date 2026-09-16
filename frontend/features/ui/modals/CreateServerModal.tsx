@@ -3,11 +3,6 @@
 import Modal from "./Modal";
 import { useForm } from "react-hook-form";
 import useCreateServer from "@/features/servers/hooks/useCreateServer";
-import { uploadFileToR2 } from "@/lib/uploadToR2";
-import { createServer,
-        getServerIconUploadUrl,
-        updateServerIcon
- } from "@/services/servers";
 
 type CreateServerForm = {
     name: string;
@@ -26,6 +21,11 @@ export default function CreateServerModal() {
         formState: { errors, isSubmitting },
     } = useForm<CreateServerForm>();
 
+    const closeModal = () => {
+        const dialogue = document.getElementById("create-server-modal") as HTMLDialogElement | null;
+        dialogue?.close();
+    };
+
     const onClose = () => {
         reset();
     };
@@ -40,7 +40,8 @@ export default function CreateServerModal() {
             });
     
             reset();
-    
+            closeModal();
+            
         } catch (error) {
             console.error(error);
         }
@@ -51,18 +52,17 @@ export default function CreateServerModal() {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <p className="flex justify-center items-center px-2 text-sm">Donne une personnalité à ton serveur en choisissant un nom et une icône. Tu pourras toujours les modifier plus tard.</p>
-
                 <fieldset className="fieldset mt-3">
                     <legend className="fieldset-legend">Choisir une image</legend>
                     <input 
-                    id="serverImageInput"
-                    type="file"
-                    accept="image/*"
-                    {...register("icon")} 
-                    className="file-input file-input-ghost"/>
+                        id="serverImageInput"
+                        type="file"
+                        accept="image/*"
+                        {...register("icon")} 
+                        className="file-input file-input-ghost"
+                    />
                     <label className="label">Max size 2MB</label>
                 </fieldset>
-
 
                 <input
                     {...register("name")}
@@ -79,7 +79,7 @@ export default function CreateServerModal() {
 
                 <button
                     type="submit"
-                    className="btn btn-primary mt-3"
+                    className="btn btn-primary mt-3 justify-self-center"
                     disabled={isSubmitting}
                 >
                     {isSubmitting ? "Création..." : "Créer"}

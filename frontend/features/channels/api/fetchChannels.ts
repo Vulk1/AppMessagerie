@@ -3,7 +3,7 @@ import apiClient from "@/lib/apiClient";
 
 export async function fetchChannels(serverId: string): Promise<Channel[]> {
   
-    const res = await apiClient.request("/channels");
+    const res = await apiClient.request(`/servers/${serverId}/channels`);
   
     if (!res.ok) {
         throw new Error("Failed to fetch servers");

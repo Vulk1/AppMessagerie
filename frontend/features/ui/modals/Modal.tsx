@@ -12,7 +12,7 @@ export default function Modal({
     onClose
 }: ModalProps) {
     return (
-        <dialog id={id} 
+        <dialog id={id}
         className="modal"
         onClose={onClose}>
             <div className="modal-box">

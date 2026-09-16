@@ -12,10 +12,14 @@ export default function ServersSidebar() {
     const { data: servers } = useServers();
 
     return (
-        <aside className="flex-col w-20 bg-[#121214] h-full px-2 py-2 ">
-            <DMButton />
+        <aside className="flex flex-col w-20 bg-[#121214] h-full py-2 justify-baseline items-center gap-3 ">
+            <div className="flex flex-col item-center">
+                <DMButton />
+                <div className="divider my-2"></div>
+            </div>
+            
 
-            <div className="flex flex-col bg-linear-to-b from-gray-800 to-gray-400 rounded-t-[10px]">
+            <div className="flex flex-col rounded-t-[10px] gap-3">
                 {servers?.map( (server: Server) => (
                     <ServerItem key={server.id} server={server} />
                 ))}
@@ -34,13 +38,13 @@ export default function ServersSidebar() {
                     }
                 }}
                 >
-                    <CirclePlus size={30} strokeWidth={2.75} color="#efeff1" />
+                    <CirclePlus size={25} strokeWidth={2.75} color="#efeff1" />
                 </button>
             </AsideComponent>
 
             <AsideComponent tooltipText="Découvrir">
                 <button className="p-2">
-                    <Compass size={30} strokeWidth={2.75} color="#efeff1" />
+                    <Compass size={25} strokeWidth={2.75} color="#efeff1" />
                 </button>
             </AsideComponent>
 
